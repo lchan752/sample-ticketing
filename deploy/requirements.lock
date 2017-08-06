@@ -1,0 +1,24 @@
+dependencies:
+- condition: ""
+  enabled: false
+  import-values: null
+  name: postgresql
+  repository: https://kubernetes-charts.storage.googleapis.com
+  tags: null
+  version: 0.7.1
+- condition: ""
+  enabled: false
+  import-values: null
+  name: redis
+  repository: https://kubernetes-charts.storage.googleapis.com
+  tags: null
+  version: 0.8.1
+- condition: ""
+  enabled: false
+  import-values: null
+  name: nginx-ingress
+  repository: https://kubernetes-charts.storage.googleapis.com
+  tags: null
+  version: 0.7.0
+digest: sha256:be479686c924b45eed333ea0f0d5dc70e45f0b36859bd4bfdef18360091ffddc
+generated: 2017-08-01T20:11:12.150731468+08:00

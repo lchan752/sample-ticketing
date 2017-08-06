@@ -1,0 +1,4 @@
+apiVersion: v1
+description: Sample Ticketing App
+name: ticketing
+version: 0.1.0

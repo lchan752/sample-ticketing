@@ -1,0 +1,26 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">Create New Ticket</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modal.hide()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form #createForm="ngForm">
+        <div class="form-group">
+            <label for="ticketName">Ticket</label>
+            <input type="text" class="form-control" placeholder="Enter Ticket Text"
+            [(ngModel)]="ticketName" name="ticketName" id="ticketName" >
+        </div>
+        <div class="form-group">
+            <label for="assigneeId">Assignee</label>
+            <select class="form-control" [(ngModel)]="assigneeId" name="assigneeId" id="assigneeId">
+                <option value="-1">Unassigned</option>
+                <option *ngFor="let worker of workers" [value]="worker.userId">{{ worker.userName }}</option>
+            </select>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="save()">Save</button>
+    <button type="button" class="btn btn-default" (click)="modal.hide()">Cancel</button>
+</div>

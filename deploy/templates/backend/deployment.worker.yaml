@@ -1,0 +1,24 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: "{{ .Release.Name }}-backend-worker"
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: backend
+        process: worker
+        release: {{ .Release.Name }}
+      annotations:
+        checksum/config: {{ include "backend.get_configmap_hash" . }}
+    spec:
+      containers:
+      - name: backend-worker
+        image: {{ include "backend.get_image" .Values.backend }}
+        imagePullPolicy: IfNotPresent
+        command: ["/venv/bin/python"]
+        args: ["manage.py", "runworker"]
+        {{- include "backend.get_environs" . | indent 8 }}
+        {{- include "backend.get_volume_mounts" . | indent 8 }}
+      {{- include "backend.get_volumes" . | indent 6 }}

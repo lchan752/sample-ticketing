@@ -1,0 +1,5 @@
+VERIFIED = 'verified'
+COMPLETED = 'completed'
+STARTED = 'started'
+ASSIGNED = 'assigned'
+UNASSIGNED = 'unassigned'

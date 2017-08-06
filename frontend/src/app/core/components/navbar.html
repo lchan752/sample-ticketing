@@ -1,0 +1,26 @@
+ <nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" routerLink="auth">Tickets App</a>
+        </div>
+         <div class="collapse navbar-collapse" *ngIf="isAuthenticated()">
+            <ul class="nav navbar-nav">
+                <li routerLinkActive="active">
+                    <a [routerLink]="ticketsLink()">My Tickets</a>
+                </li>
+            </ul> 
+            <ul class="nav navbar-nav navbar-right">
+                <li dropdown>
+                    <a href dropdownToggle (click)="false">
+                        <img src="{{ authUser.avatar }}" class="img-circle avatar"> {{ authUser.name }}
+                    </a>
+                    <ul *dropdownMenu class="dropdown-menu" role="menu">
+                        <li role="menuitem">
+                            <a class="dropdown-item" (click)="logout()">Logout</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div> 
+    </div>
+</nav>

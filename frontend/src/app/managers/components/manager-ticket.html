@@ -1,0 +1,29 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <span class="label {{ ticket.labelClass() }} pull-right">{{ ticket.status | uppercase }}</span>
+        <h3 class="panel-title">Ticket ID: {{ ticket.ticketId }}</h3>
+    </div>
+    <div class="panel-body">
+        <div *ngIf="!ticket.canSwitchAssignee()">
+            Assignee: <img src="{{ ticket.assigneeAvatar }}" class="img-circle avatar"> {{ ticket.assigneeName }}
+        </div>
+        <div *ngIf="ticket.canSwitchAssignee()">
+            Change Assignee:
+            <select *ngIf="ticket.canSwitchAssignee()"
+            [(ngModel)]="selectedWorkerId" (change)="assignTicket()">
+                <option value="-1">Unassigned</option>
+                <option *ngFor="let worker of workers" [value]="worker.userId">{{ worker.userName }}</option>
+            </select>
+        </div>
+        <hr/>
+        
+        <p *ngIf="!isUpdatingTicketName">{{ ticket.ticketName }}</p>
+        <textarea *ngIf="isUpdatingTicketName" class="form-control" [(ngModel)]="updatedTicketName"></textarea>
+        <button *ngIf="!isUpdatingTicketName" type="button" class="btn btn-default" (click)="toggleEditMode()">Edit Description</button>
+        <button *ngIf="isUpdatingTicketName" type="button" class="btn btn-primary" (click)="updateTicketName()">Save</button>
+    </div>
+    <div class="panel-footer" *ngIf="hasTicketActions()">
+        <button *ngIf="ticket.canVerify()" class='btn btn-default pull-right' (click)="verifyTicket()">Verify Ticket</button>
+        <div class="clearfix"></div>
+    </div>
+</div>

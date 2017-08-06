@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: "{{ .Release.Name }}-backend-dbmigrate"
+spec:
+  template:
+    metadata:
+      labels:
+        app: backend
+        process: dbmigrate
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+      - name: dbmigrate
+        image: {{ include "backend.get_image" .Values.backend }}
+        imagePullPolicy: IfNotPresent
+        args: ["/venv/bin/python", "manage.py", "migrate", "--noinput"]
+        {{- include "backend.get_environs" . | indent 8 }}
+      restartPolicy: Never

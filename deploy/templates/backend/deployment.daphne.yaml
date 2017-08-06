@@ -1,0 +1,23 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: "{{ .Release.Name }}-backend-daphne"
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: backend
+        process: daphne
+        release: {{ .Release.Name }}
+      annotations:
+        checksum/config: {{ include "backend.get_configmap_hash" . }}
+    spec:
+      containers:
+      - name: backend-daphne
+        image: {{ include "backend.get_image" .Values.backend }}
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: http
+          containerPort: 80
+        {{- include "backend.get_environs" . | indent 8 }}

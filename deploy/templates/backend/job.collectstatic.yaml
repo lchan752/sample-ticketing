@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: "{{ .Release.Name }}-backend-collectstatic"
+spec:
+  template:
+    metadata:
+      labels:
+        app: backend
+        process: collectstatic
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+      - name: collectstatic
+        image: {{ include "backend.get_image" .Values.backend }}
+        imagePullPolicy: IfNotPresent
+        args: ["/venv/bin/python", "manage.py", "collectstatic", "--noinput"]
+        {{- include "backend.get_environs" . | indent 8 }}
+        {{- include "backend.get_volume_mounts" . | indent 8 }}
+      {{- include "backend.get_volumes" . | indent 6 }}
+      restartPolicy: Never

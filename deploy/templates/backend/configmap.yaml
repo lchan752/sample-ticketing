@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "{{ .Release.Name }}-backend"
+data:
+  SECRET_KEY: "oifhosidfamoiaxdsfahsldfsadfasdfxagsdffsfe"
+  FRONTEND_INGRESS: "{{ .Values.frontend.ingress }}"
+  DEBUG: "True"
+  DISABLE_CORS: "{{ .Values.backend.disable_cors }}"
+  DB_USER: "{{ .Values.postgresql.postgresUser }}"
+  DB_HOST: "{{ .Release.Name }}-postgresql"
+  DB_PORT: "5432"
+  DB_SCHEMA: "{{ .Values.postgresql.postgresDatabase }}"
+  REDIS_HOST: "{{ .Release.Name }}-redis"
+  REDIS_PORT: "6379"
+  STATIC_ROOT: "/pv/static/"
+  MEDIA_ROOT: "/pv/media/"

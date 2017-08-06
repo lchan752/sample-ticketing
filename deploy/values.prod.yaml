@@ -1,0 +1,27 @@
+backend:
+  ingress: "sample.api.leowchan.com"
+  image: "lwchan752/ticketing-backend"
+  tag: "latest"
+  disable_cors: false
+frontend:
+  ingress: "sample.leowchan.com"
+  image: "lwchan752/ticketing-frontend"
+  tag: "latest"
+postgresql:
+  postgresUser: "ticketing"
+  postgresDatabase: "ticketing"
+  persistence:
+    enabled: false
+  metrics:
+    enabled: false
+redis:
+  persistence:
+    enabled: false
+  metrics:
+    enabled: false
+  usePassword: false
+nginx-ingress:
+  controller:
+    service:
+      externalIPs:
+      - 138.68.151.87

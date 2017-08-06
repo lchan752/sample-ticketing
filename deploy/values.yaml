@@ -1,0 +1,22 @@
+backend:
+  ingress: "sample.api.leowchan.com"
+  image: "lwchan752/ticketing-backend"
+  tag: "latest"
+  disable_cors: true
+frontend:
+  ingress: "sample.leowchan.com"
+  image: "lwchan752/ticketing-frontend"
+  tag: "latest"
+postgresql:
+  postgresUser: "ticketing"
+  postgresDatabase: "ticketing"
+  persistence:
+    enabled: false
+  metrics:
+    enabled: false
+redis:
+  persistence:
+    enabled: false
+  metrics:
+    enabled: false
+  usePassword: false
