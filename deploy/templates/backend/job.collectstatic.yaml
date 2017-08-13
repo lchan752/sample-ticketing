@@ -2,6 +2,8 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: "{{ .Release.Name }}-backend-collectstatic"
+  annotations:
+    "helm.sh/hook": post-install,post-upgrade,post-rollback
 spec:
   template:
     metadata:

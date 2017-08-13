@@ -10,6 +10,7 @@ frontend:
 postgresql:
   postgresUser: "ticketing"
   postgresDatabase: "ticketing"
+  postgresPassword: "8SMYaipEIW"  # for local debugging environment only.
   persistence:
     enabled: false
   metrics:

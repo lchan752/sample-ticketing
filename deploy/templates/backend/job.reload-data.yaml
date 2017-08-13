@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: "{{ .Release.Name }}-backend-dbmigrate"
+  name: "{{ .Release.Name }}-backend-reload-data"
   annotations:
     "helm.sh/hook": post-install,post-upgrade,post-rollback
 spec:
@@ -9,13 +9,13 @@ spec:
     metadata:
       labels:
         app: backend
-        process: dbmigrate
+        process: reload-data
         release: {{ .Release.Name }}
     spec:
       containers:
-      - name: dbmigrate
+      - name: reload-data
         image: {{ include "backend.get_image" .Values.backend }}
         imagePullPolicy: IfNotPresent
-        args: ["/venv/bin/python", "manage.py", "migrate", "--noinput"]
+        args: ["/venv/bin/python", "manage.py", "load_fake_data"]
         {{- include "backend.get_environs" . | indent 8 }}
       restartPolicy: Never
