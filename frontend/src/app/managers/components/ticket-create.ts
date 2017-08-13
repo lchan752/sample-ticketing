@@ -16,7 +16,7 @@ export class TicketCreate{
     constructor(
         private ticketService: TicketService,
         private toaster: ToasterService,
-        private modal: BsModalRef,
+        public modal: BsModalRef,
         private cd: ChangeDetectorRef
     ){}
 
